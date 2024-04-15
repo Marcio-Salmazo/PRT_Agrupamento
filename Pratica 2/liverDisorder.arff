@@ -1,3 +1,14 @@
+@relation liverDisorder.arff
+
+@attribute mean_corpuscular_volume numeric
+@attribute alkaline_phosphotase numeric
+@attribute alanine_aminotransferase numeric
+@attribute aspartate_aminotransferase numeric
+@attribute gammagt numeric
+@attribute drinks numeric
+@attribute selector {1,2}
+
+@data
 85,92,45,27,31,0.0,1
 85,64,59,32,23,0.0,2
 86,54,33,16,54,0.0,2

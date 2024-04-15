@@ -1,9 +1,9 @@
-@relation eggData.arff
+@relation irisData.arff
 
-@attribute A numeric
-@attribute B numeric
-@attribute C numeric
-@attribute D numeric
+@attribute sepal_length numeric
+@attribute sepal_width numeric
+@attribute petal_length numeric
+@attribute petal_sepal_width numeric
 @attribute class {Iris-setosa,Iris-versicolor,Iris-virginica}
 
 @data
