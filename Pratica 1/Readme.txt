@@ -56,6 +56,43 @@ OBS: O processo de normalização dos dados apenas vai executar se, e somente se
    grupos associados à cada objeto/registro  
 	
 ----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+
+CONTEÚDO DA PASTA 'extra'
+
+-> Existem dois arquivos dentro da pasta 'extra' os quais podem contém diferentes implementações
+   do algorítmo k-means (caso necessário).
+
+	* Arquivo 'k-means Scratch PCA.ipynb' contém a mesma implementação do arquivo
+	  'k-means Scratch NP.ipynb', contudo, uma nova etapa de pré-processamento é
+	  adicionada. A função PCA é utilizada a fim de reduzir a dimensionalidade dos
+	  dados (Os resultados obtidos se tornaram mais precisos com tal implementação)
+
+	* A pasta 'KMeans_Python' trata-se de um projeto python (desenvolvido na IDE Pycharm)
+	  contendo a mesma implementação do arquivo 'k-means Scratch NP.ipynb', porém no
+	  formata .py
+	  É importante ressaltar que para a execução, também será necessário instalar as
+	  bibliotecas necessárias (sci-kit, tkinter e pandas)
+	  
+	  -> A instalação das bibliotecas depende da IDE utilizada para a execução, no caso
+	     do pycharm, as instruções para gerenciamento de pacotes pode ser acessada por 
+	     meio do link: https://www.jetbrains.com/help/pycharm/installing-uninstalling-and-upgrading packages.html#uninstall-packages	  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
