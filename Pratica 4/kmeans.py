@@ -38,9 +38,8 @@ class K_Means:
             self.centroids[i] = data[idx]
 
         for i in range(self.max_iterations):
-            self.classes = {
-                j: [] for j in range(self.k)
-            }  # Inicialização do dicionário de classes
+            # Inicialização do dicionário de classes
+            self.classes = {j: [] for j in range(self.k)}
 
             """  
                 Sera computada as distancias euclidianas de um determinado 
