@@ -1,15 +1,18 @@
+import math
 import numpy as np
 
 
-# def euclidean_dist(x, y):
-#     return math.sqrt(math.pow(x["sepal_length"] - y["sepal_length"], 2) +
-#                      math.pow(x["sepal_width"] - y["sepal_width"], 2) +
-#                      math.pow(x["petal_length"] - y["petal_length"], 2) +
-#                      math.pow(x["petal_width"] - y["petal_width"], 2))
-
-
 def euclidean_dist(x, y):
-    return np.sqrt(np.sum((x - y) ** 2))
+    return math.sqrt(
+        math.pow(x["sepal_length"] - y["sepal_length"], 2)
+        + math.pow(x["sepal_width"] - y["sepal_width"], 2)
+        + math.pow(x["petal_length"] - y["petal_length"], 2)
+        + math.pow(x["petal_width"] - y["petal_width"], 2)
+    )
+
+
+# def euclidean_dist(x, y):
+#     return np.sqrt(np.sum((x - y) ** 2))
 
 
 class AHC:
