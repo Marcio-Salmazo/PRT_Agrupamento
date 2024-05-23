@@ -17,10 +17,12 @@ class AHC:
         self.data = data
         self.dist_matrix = self.calc_dist_matrix(data)
         self.clusters = self.init_clusters()
+        self.centroids = {}
         self.output = open("output.txt", "w")
 
+
     def calc_dist_matrix(self, data):
-        dist_matrix = [[0] * self.size for _ in range(self.size)]
+        dist_matrix = [[0] * self.size for x in range(self.size)]
 
         for i in range(self.size):
             for j in range(self.size):
@@ -81,6 +83,26 @@ class AHC:
             self.output.write(str(cluster).replace('[', '{').replace(']', '}') + ", ")
         self.output.write('\n')
 
+    def calc_centroids(self):
+        for i in range(len(self.clusters)):
+            centroid = {"sepal_length": 0,
+                        "sepal_width": 0,
+                        "petal_length": 0,
+                        "petal_width": 0}
+
+            for point in self.clusters[i]:
+                centroid["sepal_length"] += self.data.loc[point]["sepal_length"]
+                centroid["sepal_width"] += self.data.loc[point]["sepal_width"]
+                centroid["petal_length"] += self.data.loc[point]["petal_length"]
+                centroid["petal_width"] += self.data.loc[point]["petal_width"]
+
+            centroid["sepal_length"] = centroid["sepal_length"]/len(self.clusters[i])
+            centroid["sepal_width"] = centroid["sepal_width"]/len(self.clusters[i])
+            centroid["petal_length"] = centroid["petal_length"]/len(self.clusters[i])
+            centroid["petal_width"] = centroid["petal_width"]/len(self.clusters[i])
+
+            self.centroids[i] = centroid
+
     def run(self):
         while len(self.clusters) != self.k:
             self.print_clusters()
@@ -90,6 +112,7 @@ class AHC:
 
         self.print_clusters()
         self.output.close()
+        self.calc_centroids()
 
 
 def load_data(filename):
@@ -98,5 +121,5 @@ def load_data(filename):
 
 data_set = load_data("iris.csv")
 data_set.drop("class", axis=1, inplace=True)
-ahc = AHC(data_set)
+ahc = AHC(data_set, 1)
 ahc.run()
