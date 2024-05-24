@@ -1,15 +1,3 @@
-1. Instale as dependencias do projeto se necessario
-
-```console
-pip install -r requirements.txt
-```
-
-2. Para executar o arquivo:
-```console
-python silhouette.py
-```
-
-
 ----------------------------------------------------------------------------------------------------------
 
 Implementação do Criterio de Validacao silhueta simplificada - Prática 4
@@ -48,3 +36,18 @@ Instruções de uso:
 ----------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------
+
+
+
+
+
+1. Instale as dependencias do projeto se necessario
+
+```console
+pip install -r requirements.txt
+```
+
+2. Para executar o arquivo:
+```console
+python silhouette.py
+```
