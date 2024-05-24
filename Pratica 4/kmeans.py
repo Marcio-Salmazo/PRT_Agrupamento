@@ -105,33 +105,11 @@ class K_Means:
         for key, value in self.centroids.items():
             print(f"Centroid {key}: {value}")
 
+    @property
+    def centroid_values(self):
+        return np.array(list(self.centroids.values()))
+
     def fit_predict(self, data) -> Tuple[np.array, np.ndarray]:
         self.fit(data)
         labels = np.array([self.predict(point) for point in data])
         return labels, self.centroid_values
-
-    @property
-    def centroid_values(self) -> np.array:
-        # return np.array(list(self.centroids.values()))
-        return list(self.centroids.values())
-
-
-def kmeans_v2(X: np.ndarray, k: int) -> Tuple[np.ndarray, np.ndarray]:
-    # random initialize centroids
-    sampled_idxs = np.random.choice(X.shape[0], k, replace=False)
-    centroids = X[sampled_idxs]
-    new_centroids = np.zeros((k, X.shape[1]))
-    labels = np.zeros(X.shape[0])
-
-    # TODO: max iterations?
-    while not np.all(centroids == new_centroids):
-        # update cluster membership
-        distances = np.linalg.norm(X[:, None] - centroids, axis=2)
-        labels = np.argmin(distances, axis=1)  # closest
-
-        # update centroids
-        new_centroids = np.array([np.mean(X[labels == i], axis=0) for i in range(k)])
-
-        centroids = new_centroids.copy()
-
-    return labels, centroids

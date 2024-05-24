@@ -11,10 +11,6 @@ def euclidean_dist(x, y):
     )
 
 
-# def euclidean_dist(x, y):
-#     return np.sqrt(np.sum((x - y) ** 2))
-
-
 class AHC:
     def __init__(self, data, k=1, save_output=False):
         self.k = k
@@ -22,6 +18,7 @@ class AHC:
         self.data = data
         self.dist_matrix = self.calc_dist_matrix(data)
         self.clusters = self.init_clusters()
+        self.centroids = {}
         self.save_output = save_output
         if self.save_output:
             self.output = open("output.txt", "w")
@@ -88,6 +85,37 @@ class AHC:
             self.output.write(str(cluster).replace("[", "{").replace("]", "}") + ", ")
         self.output.write("\n")
 
+    def calc_centroids(self):
+        for i in range(len(self.clusters)):
+            centroid = {
+                "sepal_length": 0,
+                "sepal_width": 0,
+                "petal_length": 0,
+                "petal_width": 0,
+            }
+
+            for point in self.clusters[i]:
+                centroid["sepal_length"] += self.data.loc[point]["sepal_length"]
+                centroid["sepal_width"] += self.data.loc[point]["sepal_width"]
+                centroid["petal_length"] += self.data.loc[point]["petal_length"]
+                centroid["petal_width"] += self.data.loc[point]["petal_width"]
+
+            centroid["sepal_length"] = centroid["sepal_length"] / len(self.clusters[i])
+            centroid["sepal_width"] = centroid["sepal_width"] / len(self.clusters[i])
+            centroid["petal_length"] = centroid["petal_length"] / len(self.clusters[i])
+            centroid["petal_width"] = centroid["petal_width"] / len(self.clusters[i])
+
+            self.centroids[i] = centroid
+
+    def assign_labels(self):
+        labels = np.zeros(len(self.data), dtype=int)
+
+        for i, cluster in enumerate(self.clusters):
+            for point in cluster:
+                labels[point] = i
+
+        self.labels = labels
+
     def run(self):
         while len(self.clusters) != self.k:
             if self.save_output:
@@ -99,3 +127,6 @@ class AHC:
         if self.save_output:
             self.print_clusters()
             self.output.close()
+
+        self.calc_centroids()
+        self.assign_labels()

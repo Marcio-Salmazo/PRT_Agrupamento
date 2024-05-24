@@ -5,72 +5,62 @@ from ahc import AHC
 from kmeans import K_Means
 
 
-def silhouette_score(X: np.ndarray, labels: np.array):
-    # number of samples
+def simplified_silhouette(X, labels):
     n = X.shape[0]
-
-    # initialize silhouette scores
     sil_scores = np.zeros(n)
 
-    # calculate pairwise distances manually
-    D = np.zeros((n, n))
     for i in range(n):
-        for j in range(n):
-            D[i, j] = np.sqrt(np.sum((X[i] - X[j]) ** 2))
-
-    for i in range(n):
-        # find the cluster of the current sample
+        # encontra o cluster ao qual i pertence
         own_cluster = labels[i]
 
-        # mask for the own cluster
-        mask_own = labels == own_cluster
+        # a_i: distancia media intra-cluster,
+        # media das distancias de i para todos os outros objs no mesmo cluster
+        a_i = np.mean(np.linalg.norm(X[i] - X[labels == own_cluster], axis=1))
 
-        # a(i): the average distance to all other points in the same cluster
-        if np.sum(mask_own) > 1:
-            a_i = np.sum(D[i, mask_own]) / (np.sum(mask_own) - 1)
-        else:
-            a_i = 0
-
-        # b(i): the minimum average distance to points in any other cluster
+        # b_i: distancia media mais proxima inter-cluster,
         b_i = np.inf
         for label in np.unique(labels):
             if label == own_cluster:
                 continue
-            mask_other = labels == label
-            b_i = min(b_i, np.mean(D[i, mask_other]))
+            # para cada cluster diferente de i
+            # 1. calcula a media das distancias de i para todos objetos no cluster
+            # 2. calcula o minimo dessas distancias
+            b_i = min(b_i, np.mean(np.linalg.norm(X[i] - X[labels == label], axis=1)))
 
-        # compute the silhouette score for the current sample
-        sil_scores[i] = (b_i - a_i) / max(a_i, b_i)
+        # calcula o valor da silhueta simplificada para i,
+        # se o tamanho do cluster de i for maior que 1, caso contrario 0
+        sil_scores[i] = (
+            (b_i - a_i) / max(a_i, b_i) if np.sum(labels == own_cluster) > 1 else 0
+        )
 
     return np.mean(sil_scores)
 
 
 if __name__ == "__main__":
-    filename = "iris.csv"
+    # Carregando dataset
+    filename = "./iris.csv"
     iris = pd.read_csv(filename)
 
+    # Ignorando a coluna `class`
     X = iris.iloc[:, :4]
-    # targets
-    # y = iris.iloc[:, 4]
 
+    # Numero de clusters
     k = 3
-    # k = int(input("Number of clusters: "))
-    print("dataset: ", filename)
-    print("k: ", k)
+    # k = int(input("Numero de clusters: "))
 
-    print("\n===")
-    print("K-Means")
+    print("k\t\t\t", k)
+    print("Dataset\t\t\t", filename)
+    print("Dataset shape\t\t", X.shape)
+
     model = K_Means(k=k)
-    labels, centroids = model.fit_predict(X.to_numpy())
-    model.print_centroids()
-    print("Labels: ")
-    print(labels)
-    print("Silhouette Score: ", silhouette_score(X.to_numpy(), labels))
-    # from sklearn.metrics import silhouette_score
-    # print("sklearn Silhouette Score:", silhouette_score(X.to_numpy(), labels))
+    kmeans_labels, kmeans_centroids = model.fit_predict(X.to_numpy())
+    kmeans_sil = simplified_silhouette(X.to_numpy(), kmeans_labels)
 
-    # TODO:
-    print("\n===")
-    print("AHC")
-    ahc = AHC(X, k)
+    print("\n=== K-Means ===")
+    print("Silhouette\t ", kmeans_sil)
+
+    ahc = AHC(data=X, k=k)
     ahc.run()
+    ahc_sil = simplified_silhouette(X.to_numpy(), ahc.labels)
+    print("\n=== AHC ===")
+    print("Silhouette\t ", ahc_sil)
