@@ -1,5 +1,3 @@
-----------------------------------------------------------------------------------------------------------
-
 ### Implementação do AHC (Agglomerative Hierarchical Clustering) - Prática 3
 
 Grupo:
@@ -7,9 +5,6 @@ Andrey dos Reis Cadima Dias - Matrícula: 1241XESP054
 Marcio Salmazo Ramos - Matrícula: 12412CCP021
 Pedro Victor Guerra de Figueiredo - Matrícula: 1232XESP019
 
-21/05/2024
-
-----------------------------------------------------------------------------------------------------------
 
 ## Instruções de uso:
 
