@@ -3,12 +3,12 @@
 Grupo:
 Andrey dos Reis Cadima Dias - Matrícula: 1241XESP054\
 Marcio Salmazo Ramos - Matrícula: 12412CCP021\
-Pedro Victor Guerra de Figueiredo - Matrícula: 1232XESP019\
+Pedro Victor Guerra de Figueiredo - Matrícula: 1232XESP019
 
 
 ## Instruções de uso:
 
--> O arquivo contendo a implementação do algorítmo é denominado `ahc.ipynb`
+-> O arquivo contendo a implementação do algorítmo é denominado `ahc.ipynb`\
 -> É necessário utilizar o jupyter notebook para abrir o programa e executá-lo
  
 	* Importante salientar que o Jupyter notebook utilizado por meio da IDE VSCODE, 
