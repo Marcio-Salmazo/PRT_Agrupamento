@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------------------------------
 
-Implementação do Criterio de Validacao silhueta simplificada - Prática 4
+### Implementação do Criterio de Validacao silhueta simplificada - Prática 4
 
 Grupo:
 Andrey dos Reis Cadima Dias - Matrícula: 1241XESP054
@@ -11,7 +11,7 @@ Pedro Victor Guerra de Figueiredo - Matrícula: 1232XESP019
 
 ----------------------------------------------------------------------------------------------------------
 
-Instruções de uso:
+## Instruções de uso:
 
 -> O arquivo contendo a implementação do algorítmo é denominado 'silhouette.ipynb', 
 -> É necessário utilizar o jupyter notebook para abrir o programa e executá-lo

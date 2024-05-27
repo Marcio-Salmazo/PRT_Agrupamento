@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------------------------------
 
-Implementação do Criterio de Validacao silhueta simplificada - Prática 4
+### Implementação do AHC (Agglomerative Hierarchical Clustering) - Prática 3
 
 Grupo:
 Andrey dos Reis Cadima Dias - Matrícula: 1241XESP054
@@ -11,7 +11,7 @@ Pedro Victor Guerra de Figueiredo - Matrícula: 1232XESP019
 
 ----------------------------------------------------------------------------------------------------------
 
-Instruções de uso:
+## Instruções de uso:
 
 -> O arquivo contendo a implementação do algorítmo é denominado 'ahc.ipynb', 
 -> É necessário utilizar o jupyter notebook para abrir o programa e executá-lo
@@ -23,10 +23,6 @@ Instruções de uso:
 -> Após a instalação das bibliotecas, cada célula de código do algorítmo deve ser executada
    EM ORDEM, também há a opção no VSCODE para executar todas as celulas em sequência.
 	
-----------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------
-
 
 O arquivo `ahc.py` também contém a implementação do algorítmo. Para executar diretamente siga os passos:
 
