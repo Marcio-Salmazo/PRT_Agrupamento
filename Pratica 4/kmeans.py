@@ -101,10 +101,6 @@ class K_Means:
             if is_optimal:
                 break
 
-    def print_centroids(self):
-        for key, value in self.centroids.items():
-            print(f"Centroid {key}: {value}")
-
     @property
     def centroid_values(self):
         return np.array(list(self.centroids.values()))
