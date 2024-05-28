@@ -1,8 +1,11 @@
+import sys
 import numpy as np
 import pandas as pd
 
 from ahc import AHC
 from kmeans import K_Means
+
+np.random.seed(55)
 
 
 def simplified_silhouette(X, labels):
@@ -29,38 +32,43 @@ def simplified_silhouette(X, labels):
 
         # calcula o valor da silhueta simplificada para i,
         # se o tamanho do cluster de i for maior que 1, caso contrario 0
-        sil_scores[i] = (
-            (b_i - a_i) / max(a_i, b_i) if np.sum(labels == own_cluster) > 1 else 0
-        )
+        # sil_scores[i] = (
+        #     (b_i - a_i) / max(a_i, b_i) if np.sum(labels == own_cluster) > 1 else 0
+        # )
+        if np.sum(labels == own_cluster) > 1 and max(a_i, b_i) != 0:
+            sil_scores[i]  = (b_i - a_i) / max(a_i, b_i)
+        else:
+            sil_scores[i] = 0
 
     return np.mean(sil_scores)
 
 
 if __name__ == "__main__":
     # Carregando dataset
-    filename = "./iris.csv"
-    iris = pd.read_csv(filename)
+    dataset_path = "./iris.csv"
+    iris = pd.read_csv(dataset_path)
 
     # Ignorando a coluna `class`
     X = iris.iloc[:, :4]
 
     # Numero de clusters
     k = 3
+    if len(sys.argv) > 1:
+        k = int(sys.argv[1])
     # k = int(input("Numero de clusters: "))
 
-    print("k\t\t\t", k)
-    print("Dataset\t\t\t", filename)
-    print("Dataset shape\t\t", X.shape)
-
     model = K_Means(k=k)
-    kmeans_labels, kmeans_centroids = model.fit_predict(X.to_numpy())
+    kmeans_labels = model.fit_predict(X.to_numpy())
     kmeans_sil = simplified_silhouette(X.to_numpy(), kmeans_labels)
-
-    print("\n=== K-Means ===")
-    print("Silhouette\t ", kmeans_sil)
 
     ahc = AHC(data=X, k=k)
     ahc.run()
     ahc_sil = simplified_silhouette(X.to_numpy(), ahc.labels)
-    print("\n=== AHC ===")
-    print("Silhouette\t ", ahc_sil)
+
+    print("k", k)
+    print("Dataset", dataset_path)
+    print("Dataset shape", X.shape)
+    print()
+    print("K-Means Silhouette", kmeans_sil)
+    print("AHC Silhouette", ahc_sil)
+    print("O algoritmo com melhor pontuação de silhueta é: ", "K-Means" if kmeans_sil > ahc_sil else "AHC")
