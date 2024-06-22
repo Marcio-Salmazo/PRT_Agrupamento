@@ -11,7 +11,7 @@ def euclidean_dist(x, y, attrs):
 
 
 def transform_to_dissimilarity(similarity):
-    return 1-similarity
+    return -similarity
 
 
 def cosine_similarity(x, y, attrs):

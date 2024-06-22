@@ -7,7 +7,7 @@ import pandas as pd
 
 
 class KMeans:
-    def __init__(self, data, labels, k=2, t=5, dist=euclidean_dist):
+    def __init__(self, data, labels, k=2, t=4, dist=euclidean_dist):
         self.k = k
         self.data = data
         self.labels = labels
@@ -16,6 +16,7 @@ class KMeans:
         self.t = t
         self.centroids = pd.DataFrame(columns=data.columns.values)
         self.clusters = [[] for _ in range(k)]
+        self.name = 'kmeans'
 
     def select_initial_centroids(self):
         random.seed(time.time_ns())
@@ -64,15 +65,3 @@ class KMeans:
         for i in range(self.t):
             self.assign_clusters()
             self.calc_centroids()
-
-
-
-def load_data(filename):
-    return pd.read_csv(filename)
-
-
-data_set = load_data("iris.csv")
-labels = data_set["class"]
-data_set.drop("class", axis=1, inplace=True)
-kmeans = KMeans(data_set, labels, 3)
-kmeans.run()

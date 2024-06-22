@@ -1,9 +1,5 @@
 from distances import *
 
-import pandas as pd
-import sys
-import math
-
 
 class AHC:
     # Método de inicialização do AHC:
@@ -20,6 +16,7 @@ class AHC:
         self.dist = dist
         self.dist_matrix = self.calc_dist_matrix(data)
         self.clusters = self.init_clusters()
+        self.name = 'ahc'
 
 
     def calc_dist_matrix(self, data):
@@ -84,17 +81,3 @@ class AHC:
             clusters_to_merge = self.find_single_link()
             self.merge_clusters(clusters_to_merge[0], clusters_to_merge[1])
             self.update_dist_matrix(clusters_to_merge[0], clusters_to_merge[1])
-
-
-
-def load_data(filename):
-    return pd.read_csv(filename)
-
-
-k = 3
-
-data_set = load_data("iris.csv")
-labels = data_set["class"]
-data_set.drop("class", axis=1, inplace=True)
-ahc = AHC(data_set, labels, k)
-ahc.run()

@@ -41,8 +41,8 @@ def silhouette(clusters, df, dist):
 
         clusters_sil[cluster] = clusters_sil[cluster]/len(point_sil_per_cluster[cluster])
 
-    clusters_sil["clustering silhouette"] = clustering_sil/len(df)
-    return clusters_sil
+    # clusters_sil["clustering silhouette"] = clustering_sil/len(df)
+    return clustering_sil/len(df)
 
 
 def purity(clusters, labels, classes):
@@ -68,5 +68,14 @@ def purity(clusters, labels, classes):
     for c, p in result.items():
         clustering_p += (len(clusters[c])/len(labels))*p
 
-    result["clustering purity"] = clustering_p
-    return result
+    # result["clustering purity"] = clustering_p
+    return clustering_p
+
+
+def build_clusters(sklearn_labels, n_clusters):
+    clusters = [[] for _ in range(n_clusters)]
+
+    for i in range(len(sklearn_labels)):
+        clusters[sklearn_labels[i]].append(i)
+
+    return clusters
