@@ -11,11 +11,17 @@ utilizando bibliotecas como Scikit-Learn, NumPy e Matplotlib.
 #### Tópicos Abordados:
 
 ✅ Introdução ao Agrupamento de Dados
+
 ✅ K-Means e suas variantes
+
 ✅ Métodos Hierárquicos (Agglomerativo, Divisivo, Dendrogramas)
+
 ✅ DBSCAN e agrupamento baseado em densidade
+
 ✅ Métricas de Avaliação (Silhueta, SSE, Davies-Bouldin, etc.)
+
 ✅ Redução de Dimensionalidade para Clustering (PCA, t-SNE, UMAP)
+
 ✅ Aplicações práticas em datasets reais
 
 #### Tecnologias Utilizadas
